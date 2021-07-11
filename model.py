@@ -48,13 +48,13 @@ class NlpModel:
         _ = self.model(inputs)
         self.model.load_weights('output_weights.hdf5')
 
-    def decode_predictions(self, text, intent_names, slot_names,
+    def decode_predictions(self, p_text, intent_names, slot_names,
                            intent_id, slot_ids):
         info = {"intent": intent_names[intent_id]}
         collected_slots = {}
         active_slot_words = []
         active_slot_name = None
-        for word in text.split():
+        for word in p_text.split():
             tokens = self.tokenizer.tokenize(word)
             current_word_slot_ids = slot_ids[:len(tokens)]
             slot_ids = slot_ids[len(tokens):]
@@ -80,9 +80,9 @@ class NlpModel:
         info["slots"] = collected_slots
         return info
 
-    def nlu(self, text):
+    def nlu(self, p_text):
         intent_names, slot_names = self.intent_names, self.slot_names
-        inputs = tf.constant(self.tokenizer.encode(text))[None, :]  # batch_size = 1
+        inputs = tf.constant(self.tokenizer.encode(p_text))[None, :]  # batch_size = 1
         outputs = self.model(inputs)
         slot_logits, intent_logits = outputs
         slot_ids = slot_logits.numpy().argmax(axis=-1)[0, 1:-1]
@@ -90,27 +90,28 @@ class NlpModel:
 
         return self.decode_predictions(text, intent_names, slot_names, intent_id, slot_ids)
 
-    def return_bert_tokens(self, text):
-        return self.tokenizer.tokenize(text)
+    def return_bert_tokens(self, p_text):
+        return self.tokenizer.tokenize(p_text)
 
-    def show_predictions(self, text):
+    def show_predictions(self, p_text):
         intent_names, slot_names = self.intent_names, self.slot_names
-        inputs = tf.constant(self.tokenizer.encode(text))[None, :]  # batch_size = 1
+        inputs = tf.constant(self.tokenizer.encode(p_text))[None, :]  # batch_size = 1
         outputs = self.model(inputs)
         slot_logits, intent_logits = outputs
         slot_ids = slot_logits.numpy().argmax(axis=-1)[0, 1:-1]
         intent_id = intent_logits.numpy().argmax(axis=-1)[0]
-        intent = "## Intent: " + intent_names[intent_id]
-        slots = "## Slots: \n"
+        intent_str = "## Intent: " + intent_names[intent_id]
+        slots_str = "## Slots: \n"
         for token, slot_id in zip(self.tokenizer.tokenize(text), slot_ids):
-            slots += "{}: {}\n".format(token, slot_names[slot_id])
-        return intent, slots
+            slots_str += "{}: {}\n".format(token, slot_names[slot_id])
+        return intent_str, slots_str
 
 
 if __name__ == '__main__':
     nlp_model_inst = NlpModel()
-    print(nlp_model_inst.return_bert_tokens("I would like to listen to Anima by Thom Yorke on Spotify"))
-    intent, slots = nlp_model_inst.show_predictions("I would like to listen to Anima by Thom Yorke on Spotify")
+    text = "I would like to listen to Anima by Thom Yorke on Spotify"
+    print(nlp_model_inst.return_bert_tokens(text))
+    intent, slots = nlp_model_inst.show_predictions(text)
     print(intent)
     print(slots)
-    print(nlp_model_inst.nlu("I would like to listen to Anima by Thom Yorke on Spotify"))
+    print(nlp_model_inst.nlu(text))

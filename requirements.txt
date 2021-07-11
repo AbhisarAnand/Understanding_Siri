@@ -1,0 +1,4 @@
+streamlit~=0.84.0
+tensorflow~=2.4.1
+tensorflow-gpu~=2.4.1
+transformers~=4.8.2
