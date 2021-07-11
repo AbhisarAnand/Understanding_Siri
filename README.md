@@ -1,6 +1,6 @@
 # Understanding Siri
 ### Thank you for visiting! ![](https://visitor-badge.glitch.me/badge?page_id=AbhisarAnand.Understanding_Siri) [![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/)   
-This repository contains code which takes in a text input and outputs the intent of the sentence and the supporting information.
+This repository contains code that takes in a text input and outputs the intent of the sentence and the supporting information.
 
 ## Running the Code
 
