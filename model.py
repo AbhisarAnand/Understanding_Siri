@@ -87,7 +87,7 @@ class NlpModel:
         slot_ids = slot_logits.numpy().argmax(axis=-1)[0, 1:-1]
         intent_id = intent_logits.numpy().argmax(axis=-1)[0]
 
-        return self.decode_predictions(text, intent_names, slot_names, intent_id, slot_ids)
+        return self.decode_predictions(p_text, intent_names, slot_names, intent_id, slot_ids)
 
     def return_bert_tokens(self, p_text):
         return self.tokenizer.tokenize(p_text)
