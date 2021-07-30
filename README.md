@@ -2,6 +2,9 @@
 ### Thank you for visiting! ![](https://visitor-badge.glitch.me/badge?page_id=AbhisarAnand.Understanding_Siri) [![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/)   
 This repository contains code that takes in a text input and outputs the intent of the sentence and the supporting information.
 Link to our presentation can be found [here](https://docs.google.com/presentation/d/e/2PACX-1vRX3I5WtDO4xJpFy3TYE2nYFnyVvevksSTkXI7r80lwNprh47AmL0xfOyEHg2pQx1cRNiAK8OSBpCan/pub?start=true&loop=true&delayms=3000).
+
+## Demo: Click [here](https://share.streamlit.io/abhisaranand/understanding_siri/main/main.py)
+
 ## Running the Code
 
 ### Cloning the Code
