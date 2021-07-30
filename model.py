@@ -1,7 +1,6 @@
+import tensorflow as tf
 from abc import ABC
 from pathlib import Path
-
-import tensorflow as tf
 from tensorflow.keras.layers import Dropout, Dense
 from transformers import BertTokenizer
 from transformers import TFBertModel
@@ -102,7 +101,7 @@ class NlpModel:
         intent_id = intent_logits.numpy().argmax(axis=-1)[0]
         intent_str = "## Intent: " + intent_names[intent_id]
         slots_str = "## Slots: \n"
-        for token, slot_id in zip(self.tokenizer.tokenize(text), slot_ids):
+        for token, slot_id in zip(self.tokenizer.tokenize(p_text), slot_ids):
             slots_str += "{}: {}\n".format(token, slot_names[slot_id])
         return intent_str, slots_str
 
