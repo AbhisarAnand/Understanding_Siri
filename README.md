@@ -5,7 +5,7 @@ Link to our presentation can be found [here](https://docs.google.com/presentatio
 
 ## Demo: Click [here](https://share.streamlit.io/abhisaranand/understanding_siri/main/main.py)
 
-## Running the Code
+## Getting Started
 
 ### Cloning the Code
 ```shell
